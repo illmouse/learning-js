@@ -10,14 +10,14 @@ let gulp = require('gulp'),
 
 let bs_baseDir = 'dist';
 
-let sass_in = 'src/**/*.{scss,sass}';
-let sass_out = 'dist/css';
+let sass_in = 'src/sass/*.{scss,sass}';
+let sass_out = 'dist/css/';
 
-let pug_in = 'src/**/!(_)*.pug';
-let pug_watch = 'src/**/*.pug';
+let pug_in = 'src/pug/!(_)*.pug';
+let pug_watch = 'src/pug/*.pug';
 let pug_out = 'dist';
 
-let js_in = 'src/**/*.js';
+let js_in = 'src/js/*.js';
 let js_out = 'dist/js';
 
 let show_notifications = true; //dont show notifications when BS starts
@@ -28,7 +28,6 @@ function compileSass() {
         .pipe(sass().on('error', notify.onError(function (error) {
             return 'SASS error.\n'+'Look in the console for details.\n\n\n'+error;
         })))
-        //.pipe(autoprefixer('> 5%', 'last 2 version'))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(sass_out))
         .pipe(browserSync.stream());
@@ -44,7 +43,6 @@ function compilePug() {
             return 'PUG error.\nLook in the console for details.\n\n\n'+error;
         })).pipe(gulp.dest(pug_out))
         ;
-    //.pipe(browserSync.reload({stream: true}))
     if (show_notifications)
         stream.pipe(notify({message: 'HTML changed.', onLast: true}));
     return stream;
@@ -96,11 +94,3 @@ gulp.task('watch', ['build-browserSync'], function() {
 });
 
 gulp.task('default', ['watch']);
-
-
-// gulp.task('scripts', function() {
-//     return gulp.src('src')
-//         .pipe(concat('libs.min.js'))
-//         .pipe(uglify())
-//         .pipe(gulp.dest('src/js'));
-// });
