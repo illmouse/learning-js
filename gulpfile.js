@@ -11,14 +11,14 @@ let gulp = require('gulp'),
 let bs_baseDir = 'dist';
 
 let sass_in = 'src/**/*.{scss,sass}';
-let sass_out = 'dist';
+let sass_out = 'dist/css';
 
 let pug_in = 'src/**/!(_)*.pug';
 let pug_watch = 'src/**/*.pug';
 let pug_out = 'dist';
 
 let js_in = 'src/**/*.js';
-let js_out = 'dist';
+let js_out = 'dist/js';
 
 let show_notifications = true; //dont show notifications when BS starts
 
