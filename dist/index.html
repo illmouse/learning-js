@@ -7,9 +7,22 @@
 </head>
 <body>
   <div class="box">
-    <input class="inputSessi" type="text" id="inputSessi" placeholder="Input temprature in C"/>
+    <h2 class="box-h">Convert C to F</h2>
+    <input class="input input__Sessi" type="text" id="inputSessi" placeholder="Input temprature in C"/>
     <button class="button" onclick="convert()">Press to calc</button>
-    <div class="result"></div>
+    <div class="result result__temp"></div>
+  </div>
+  <div class="box">
+    <h2 class="box-h">Rewrite variable</h2>
+    <input class="input input__Name" type="text" id="inputName" placeholder="var &quot;Name&quot;"/>
+    <button class="button" onclick="putVar()">Become admin</button>
+    <div class="result result__admin"></div>
+  </div>
+  <div class="box">
+    <h2 class="box-h">Number + String</h2>
+    <div class="box box--summ">
+      <script>document.getElementsByClassName("box--summ")[0].innerHTML = 1000 + "108"</script>
+    </div>
   </div>
   <script src="js/script.js"></script>
 </body>
