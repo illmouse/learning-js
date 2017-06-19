@@ -3,7 +3,7 @@
 function convert () {
 	let resultClass = document.getElementsByClassName("result")[0];
 	let tSessi = parseInt(document.getElementById("inputSessi").value);
-	let tFar = (9 / 5) * (tSessi + 32);
+	let tFar = (9 / 5) * tSessi + 32;
 	if ( !(resultClass.classList.contains("result--exposed")) ) {
 		resultClass.classList.add("result--exposed");
 	}
