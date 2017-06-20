@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+html(lang="en")
+head
+	meta(charset="UTF-8")
+	title Document
+	link(rel="stylesheet", href="css/style.css")
+body
+	.box
+		h2.box-h
+			| Convert C to F
+		input(type="text", id="inputSessi", class="input input__Sessi", placeholder="Input temprature in C")
+		button(onclick="convert()", class="button")
+			| Press to calc
+		.result.result__temp
+	.box
+		h2.box-h
+			| Rewrite variable
+		input(type="text", id="inputName", class="input input__Name", placeholder='var "Name"', value="Вася")
+		button(onclick="putVar()", class="button")
+			| Become admin
+		.result.result__admin
+	.box
+		h2.box-h
+			| Number + String
+		.box.box--summ
+			script.
+				document.getElementsByClassName("box--summ")[0].innerHTML = 1000 + "108"
+	script(src="js/script.js")
