@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <div class="box box--1">
+    <h2>1</h2>
+    <script>//- var a = 1, b = 1, c, d; c = ++a; console.log(c); // 2 d = b++; alert(d); // 1 c = (2+ ++a); alert(c); // 5 d = (2+ b++); alert(d); // 4 alert(a); // 3 alert(b); // 3</script>
+  </div>
+  <div class="box box--2">
+    <h2>2</h2>
+  </div>
+  <div class="box box--3">
+    <h2>3 - Введите целое число</h2>
+    <input class="input" type="text" id="a3" placeholder="var a" value="5" pattern="[0-9]*"/>
+    <input class="input" type="text" id="b3" placeholder="var b" value="10" pattern="[0-9]*"/>
+    <button class="button" type="submit" onclick="diffNum()">Count</button>
+    <div class="result result--3"></div>
+  </div>
+  <script src="js/script.js"></script>
+</body>

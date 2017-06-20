@@ -14,7 +14,7 @@ let sass_in = 'src/**/*.{scss,sass}';
 let sass_out = 'dist';
 
 let pug_in = 'src/**/!(_)*.pug';
-let pug_watch = 'src/pug/*.pug';
+let pug_watch = 'src/**/*.pug';
 let pug_out = 'dist';
 
 let js_in = 'src/**/*.js';
