@@ -1,7 +1,3 @@
-
-
-
-
 function numInteger() {
 	let a3 = parseInt(document.getElementById("a3").value);
 	let b3 = parseInt(document.getElementById("b3").value);
@@ -40,23 +36,18 @@ function varSwitch() {
 }
 
 function numSumm(a5,b5) {
-	// var a5 = parseInt(document.getElementById("a5").value);
-	// var b5 = parseInt(document.getElementById("b5").value);
 	return a5 + b5;
 }
+
 function numDiff(a5,b5) {
-	// var a5 = parseInt(document.getElementById("a5").value);
-	// var b5 = parseInt(document.getElementById("b5").value);
 	return a5 - b5;
 }
+
 function numMult(a5,b5) {
-	// var a5 = parseInt(document.getElementById("a5").value);
-	// var b5 = parseInt(document.getElementById("b5").value);
 	return a5 * b5;
 }
+
 function numDiv(a5,b5) {
-	// var a5 = parseInt(document.getElementById("a5").value);
-	// var b5 = parseInt(document.getElementById("b5").value);
 	return a5 / b5;
 }
 
@@ -85,7 +76,3 @@ function numMultiaction(a6, b6, op6) {
 function writeHTML(where, what) {
 	document.getElementsByClassName(where)[0].innerHTML = what;
 }
-
-// function numResult() {
-// 	document.getElementsByClassName("result--5")[0].innerHTML = x5;
-// }
