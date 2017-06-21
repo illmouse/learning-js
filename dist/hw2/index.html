@@ -6,19 +6,63 @@
   <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-  <div class="box box--1">
-    <h2>1</h2>
-    <script>//- var a = 1, b = 1, c, d; c = ++a; console.log(c); // 2 d = b++; alert(d); // 1 c = (2+ ++a); alert(c); // 5 d = (2+ b++); alert(d); // 4 alert(a); // 3 alert(b); // 3</script>
-  </div>
-  <div class="box box--2">
-    <h2>2</h2>
-  </div>
-  <div class="box box--3">
-    <h2>3 - Введите целое число</h2>
-    <input class="input" type="text" id="a3" placeholder="var a" value="5" pattern="[0-9]*"/>
-    <input class="input" type="text" id="b3" placeholder="var b" value="10" pattern="[0-9]*"/>
-    <button class="button" type="submit" onclick="diffNum()">Count</button>
-    <div class="result result--3"></div>
+  <div class="wrapper">
+    <div class="box box--1">
+      <h2>1</h2>
+      <div class="box">var a = 1, b = 1, c, d; c = ++a; alert(c); // 2 d = b++; alert(d); // 1 c = (2+ ++a); alert(c); // 5 d = (2+ b++); alert(d); // 4 alert(a); // 3 alert(b); // 3</div>
+      <div class="box">Результатом будет переменная "c", так как остальной код закомментирован.</div>
+    </div>
+    <div class="box box--2">
+      <h2>2</h2>
+      <div class="box">
+        let a = 2;
+        let x = 1 + (a *= 2);
+        console.log(x);
+      </div>
+      <div class="box">Результат вычислений = 5.</div>
+    </div>
+    <div class="box box--3">
+      <h2>3 - Введите целое число</h2>
+      <input class="input" type="text" id="a3" placeholder="var a" value="5"/>
+      <input class="input" type="text" id="b3" placeholder="var b" value="10"/>
+      <button class="button" onclick="numInteger()">Count</button>
+      <div class="result result--3"></div>
+    </div>
+    <div class="box box--4">
+      <h2>4 - Switch от a до 15.</h2>
+      <input class="input" type="text" id="a4" placeholder="var a" value="2"/>
+      <button class="button" onclick="varSwitch()">Count</button>
+      <div class="result result--4"></div>
+    </div>
+    <div class="box box--5">
+      <h2>5 - + * - /</h2>
+      <div class="wrapper">
+        <input class="input input--sm" type="text" id="a5" placeholder="arg1"/>
+        <input class="input input--sm" type="text" id="b5" placeholder="arg2"/>
+      </div>
+      <div class="wrapper">
+        <button class="button" onclick="writeHTML('result--5', numSumm(parseInt(document.getElementById('a5').value), parseInt(document.getElementById('b5').value)))">Сумма</button>
+        <button class="button" onclick="writeHTML('result--5', numDiff(parseInt(document.getElementById('a5').value), parseInt(document.getElementById('b5').value)))">Разность</button>
+        <button class="button" onclick="writeHTML('result--5', numMult(parseInt(document.getElementById('a5').value), parseInt(document.getElementById('b5').value)))">Произведение</button>
+        <button class="button" onclick="writeHTML('result--5', numDiv(parseInt(document.getElementById('a5').value), parseInt(document.getElementById('b5').value)))">Отношение</button>
+      </div>
+      <div class="result result--5"></div>
+    </div>
+    <div class="box box--6">
+      <h2>6 - Multifunctional operations</h2>
+      <div class="wrapper">
+        <input class="input input--sm" type="text" id="a6" placeholder="arg1"/>
+        <input class="input input--sm" type="text" id="b6" placeholder="arg2"/>
+        <select id="op6">
+          <option value="Summ">Сумма</option>
+          <option value="Diff">Разность</option>
+          <option value="Mult">Произведение</option>
+          <option value="Div">Отношение</option>
+        </select>
+        <button class="button" onclick="document.getElementsByClassName('result--6')[0].innerHTML = numMultiaction()">Посчитать</button>
+      </div>
+      <div class="result result--6"></div>
+    </div>
   </div>
   <script src="js/script.js"></script>
 </body>

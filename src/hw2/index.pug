@@ -5,21 +5,51 @@ head
 	title Document
 	link(rel="stylesheet", href="css/style.css")
 body
-	.box.box--1
-		h2 1
-		script.
-			//- var a = 1, b = 1, c, d; c = ++a; console.log(c); // 2 d = b++; alert(d); // 1 c = (2+ ++a); alert(c); // 5 d = (2+ b++); alert(d); // 4 alert(a); // 3 alert(b); // 3
-	.box.box--2
-		h2 2
-		//- script.
-		//- 	let a = 2;
-		//- 	let x = 1 + (a *= 2);
-		//- 	console.log(x);
-	.box.box--3
-		h2 3 - Введите целое число
-		input(type="text", id="a3", class="input", placeholder='var a', value="5", pattern="[0-9]*")
-		input(type="text", id="b3", class="input", placeholder='var b', value="10", pattern="[0-9]*")
-		button(type="submit", onclick="diffNum()", class="button") Count
-		.result.result--3
-
+	.wrapper
+		.box.box--1
+			h2 1
+			.box
+				| var a = 1, b = 1, c, d; c = ++a; alert(c); // 2 d = b++; alert(d); // 1 c = (2+ ++a); alert(c); // 5 d = (2+ b++); alert(d); // 4 alert(a); // 3 alert(b); // 3
+			.box Результатом будет переменная "c", так как остальной код закомментирован.
+		.box.box--2
+			h2 2
+			.box
+				| let a = 2;
+				| let x = 1 + (a *= 2);
+				| console.log(x);
+			.box Результат вычислений = 5.
+		.box.box--3
+			h2 3 - Введите целое число
+			input(type="text", id="a3", class="input", placeholder='var a', value="5")
+			input(type="text", id="b3", class="input", placeholder='var b', value="10")
+			button(onclick="numInteger()", class="button") Count
+			.result.result--3
+		.box.box--4
+			h2 4 - Switch от a до 15.
+			input(type="text", id="a4", class="input", placeholder='var a', value="2")
+			button(onclick="varSwitch()", class="button") Count
+			.result.result--4
+		.box.box--5
+			h2 5 - + * - /
+			.wrapper
+				input(type="text", id="a5", class="input input--sm", placeholder='arg1')
+				input(type="text", id="b5", class="input input--sm", placeholder='arg2')
+			.wrapper
+				button(onclick="writeHTML('result--5', numSumm(parseInt(document.getElementById('a5').value), parseInt(document.getElementById('b5').value)))", class="button") Сумма
+				button(onclick="writeHTML('result--5', numDiff(parseInt(document.getElementById('a5').value), parseInt(document.getElementById('b5').value)))", class="button") Разность
+				button(onclick="writeHTML('result--5', numMult(parseInt(document.getElementById('a5').value), parseInt(document.getElementById('b5').value)))", class="button") Произведение
+				button(onclick="writeHTML('result--5', numDiv(parseInt(document.getElementById('a5').value), parseInt(document.getElementById('b5').value)))", class="button") Отношение
+			.result.result--5
+		.box.box--6
+			h2 6 - Multifunctional operations
+			.wrapper
+				input(type="text", id="a6", class="input input--sm", placeholder='arg1')
+				input(type="text", id="b6", class="input input--sm", placeholder='arg2')
+				select#op6
+					option(value="Summ") Сумма
+					option(value="Diff") Разность
+					option(value="Mult") Произведение
+					option(value="Div") Отношение
+				button(onclick="document.getElementsByClassName('result--6')[0].innerHTML = numMultiaction()", class="button") Посчитать
+			.result.result--6
 	script(src="js/script.js")
