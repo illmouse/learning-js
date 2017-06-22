@@ -76,3 +76,11 @@ function numMultiaction(a6, b6, op6) {
 function writeHTML(where, what) {
 	document.getElementsByClassName(where)[0].innerHTML = what;
 }
+
+function power(val, pow) {
+	if (pow != 1) {
+		return val * power(val, pow - 1);
+	} else {
+		return val;
+	}
+}

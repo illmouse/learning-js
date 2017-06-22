@@ -81,6 +81,17 @@
       </div>
       <div class="result result--6"></div>
     </div>
+    <div class="box box--7">
+      <h2>7 - Сравнить null и 0</h2>
+      <div class="box box--inner">null и undefined равны друг другу, но больше не равны ничему другому.</div>
+    </div>
+    <div class="box box--8">
+      <h2>8 - Рекурсивное возведение в степень.</h2>
+      <input class="input" type="text" id="a8" placeholder="число"/>
+      <input class="input" type="text" id="b8" placeholder="степень"/>
+      <button class="button" onclick="writeHTML('result--8', power(parseInt(document.getElementById('a8').value), parseInt(document.getElementById('b8').value)))">Посчитать</button>
+      <div class="result result--8"></div>
+    </div>
   </div>
   <script src="js/script.js"></script>
 </body>
