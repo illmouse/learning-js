@@ -1,16 +1,22 @@
 // Задание №1
 console.log("\t ***** Задание №1 *****");
-
-	var i = 2;
-	var n = 2;
-
-	while (i < 10) {
-		if (((i - 1) % n) != 0) {
-			++n;
-		} else {
+	
+	task1:
+	for (var i = 100, n; i > 1; i--) {
+		if (i == 2) {
 			console.log(i);
-			n = 2;
-			++i
+		}
+
+		n = (i - 1);
+		while (n > 1) {
+			if ((i % n) == 0) {
+				continue task1;
+			} else if ((i % n) != 0 && n > 2) {
+				--n;
+			} else {
+				console.log(i);
+				--n;
+			}
 		}
 	}
 
