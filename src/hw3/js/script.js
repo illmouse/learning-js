@@ -2,13 +2,14 @@
 console.log("\t ***** Задание №1 *****");
 
 	var i = 2;
-	var n = 1;
+	var n = 2;
+
 	while (i < 10) {
 		if (((i - 1) % n) != 0) {
 			++n;
 		} else {
 			console.log(i);
-			n = 1;
+			n = 2;
 			++i
 		}
 	}
@@ -29,8 +30,6 @@ console.log("\t ***** Задание №2 *****");
 		++i
 	} while (i <= 10)
 
-	
-
 // Задание №3
 console.log("\t ***** Задание №3 *****");
 
@@ -39,6 +38,6 @@ console.log("\t ***** Задание №3 *****");
 // Задание №4
 console.log("\t ***** Задание №4 *****");
 
-	for (var i = 0, x = "x"; i < 20; i++) {
-		i = 0 ? console.log("x") : console.log(x = x + "x");
+	for (var i = 0, x = ""; i < 20; i++) {
+		console.log(x = x + "x");
 	}
