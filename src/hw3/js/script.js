@@ -1,6 +1,6 @@
 // Задание №1
 console.log("\t ***** Задание №1 *****");
-	
+console.log("***** Решение №1 *****");
 	task1:
 	for (var i = 0, n; i <= 100; i++) {
 
@@ -20,6 +20,48 @@ console.log("\t ***** Задание №1 *****");
 			}
 		}
 	}
+
+	for (var i =0, n; i <= 10; ++i) {
+
+	}
+ 
+	function simple() {
+		return (i % n) == 0;
+	}
+
+console.log("***** Решение №2 *****");
+
+	var length = 100;
+	var arr = [];
+	createArray(length);
+	arr.forEach(excludeElements);
+	arr.forEach(printArray);
+	
+
+
+	function createArray(length) {
+		for (var i = 2; i < length; i++) {
+			if (i == 2) {
+				arr.push(i);
+			} else if ((i % 2) != 0) {
+				arr.push(i);
+			}
+		}
+	}
+
+	function excludeElements(element) {
+		for (var arrLength = arr.length, index = (arr.indexOf(element) + 1); index < arrLength; ++index ) {
+			if ((arr[index] % element) == 0) {
+				arr.splice(arr.indexOf(arr[index]), 1);
+			}
+		}
+	}
+
+	function printArray(element) {
+  	console.log(element);
+	}
+
+
 
 // Задание №2
 console.log("\t ***** Задание №2 *****");
