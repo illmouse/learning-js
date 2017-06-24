@@ -35,27 +35,24 @@ console.log("***** Решение №2 *****");
 
 	var length = 100;
 	var arr = [];
-	createArray(length);
+	fillArray(length);
 	arr.forEach(excludeElements);
 	arr.forEach(printArray);
 	
 
 
-	function createArray(length) {
+	function fillArray(length) {
 		for (var i = 2; i < length; i++) {
-			if (i == 2) {
-				arr.push(i);
-			} else if ((i % 2) != 0) {
-				arr.push(i);
-			}
+			(((i % 2) != 0) || i == 2) ? arr.push(i) : '';
 		}
 	}
 
 	function excludeElements(element) {
-		for (var arrLength = arr.length, index = (arr.indexOf(element) + 1); index < arrLength; ++index ) {
-			if ((arr[index] % element) == 0) {
-				arr.splice(arr.indexOf(arr[index]), 1);
-			}
+		var arrLength = arr.length;
+		var index = (arr.indexOf(element) + 1);
+
+		for (; index < arrLength; index++) {
+			((arr[index] % element) == 0) ? arr.splice(arr.indexOf(arr[index]), 1) : '';
 		}
 	}
 
@@ -73,7 +70,7 @@ console.log("***** Решение №3 *****");
 		}
 		return true;
 	}
-	
+
 	for (let i = 2; i < 100; i++) {
 		simple(i) ? console.log(i) : '';
 	}
