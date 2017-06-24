@@ -1,3 +1,5 @@
+"use sctrict"
+
 // Задание №1
 console.log("\t ***** Задание №1 *****");
 console.log("***** Решение №1 *****");
@@ -61,6 +63,20 @@ console.log("***** Решение №2 *****");
   	console.log(element);
 	}
 
+console.log("***** Решение №3 *****");
+
+	function simple(n) {
+		for (let i = 2; i <= Math.sqrt(n); i++) {
+			if (n % i == 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	for (let i = 2; i < 100; i++) {
+		simple(i) ? console.log(i) : '';
+	}
 
 
 // Задание №2
