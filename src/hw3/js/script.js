@@ -34,17 +34,16 @@ console.log("***** Решение №1 *****");
 console.log("***** Решение №2 *****");
 
 	var length = 100;
-	var arr = [];
-	fillArray(length);
+	var arr = initArray(length);
 	arr.forEach(excludeElements);
 	arr.forEach(printArray);
-	
 
-
-	function fillArray(length) {
+	function initArray(length) {
+		var array = [];
 		for (var i = 2; i < length; i++) {
-			(((i % 2) != 0) || i == 2) ? arr.push(i) : '';
+			(((i % 2) != 0) || i == 2) ? array.push(i) : '';
 		}
+		return array;
 	}
 
 	function excludeElements(element) {
