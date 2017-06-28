@@ -2,7 +2,7 @@
 
 console.log("\t\t********* Задание №1 *********");
 
-toObject("345");
+toObject("");
 
 function toObject(arg) {
 
@@ -15,12 +15,25 @@ function toObject(arg) {
 	// Создаем объект и конвертируем число в строку.
 	var obj = {};
 	arg = arg.toString();
+	var length = arg.length;
+
 
 	// Если длинна строки не превышает 3, присваиваем значения посимвольно в объект.
-	if (arg.length <= 3) {
-		obj.units = arg.charAt(2);
-		obj.tens = arg.charAt(1);
-		obj.hundreds = arg.charAt(0);
+	if (length <= 3) {
+		switch(true) {
+			case length == 3:
+				obj.units = arg.charAt(2);
+				obj.tens = arg.charAt(1);
+				obj.hundreds = arg.charAt(0);
+				break;
+			case length == 2:
+				obj.units = arg.charAt(1);
+				obj.tens = arg.charAt(0);
+				break;
+			case length == 1:
+				obj.units = arg.charAt(0);
+				break;
+		}
 	} else {
 		console.log("Число превышает допустимое значение. Задайте число менее 1000.");
 	}
