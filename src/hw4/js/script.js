@@ -2,7 +2,7 @@
 
 console.log("\t\t********* Задание №1 *********");
 
-toObject("");
+toObject("279");
 
 function toObject(arg) {
 
