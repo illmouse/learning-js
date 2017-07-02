@@ -1,0 +1,56 @@
+*
+	box-sizing: content-box
+
+$size: 10
+$calced-size: 50px * $size
+
+.chess-wrap
+	display: flex
+	flex-wrap: wrap
+	width: $calced-size
+	height: $calced-size
+.ch-item
+  width: 50px
+  height: 50px
+  line-height: 50px
+  color: black
+  text-align: center
+  background-size: contain
+  transition: background-color .3s ease
+  &:hover
+    background-color: #44fb2b
+  &--black
+    background-color: #5a3113
+    color: white
+    &:hover
+      background-color: #b78b6a
+  &--grey
+    background-color: grey
+    font-weight: bold
+  &--rook-white
+    background-image: url(../png/Chess_rlt60.png)
+  &--rook-black
+    background-image: url(../png/Chess_rdt60.png)
+  &--knight-white
+    background-image: url(../png/Chess_nlt60.png)
+  &--knight-black
+    background-image: url(../png/Chess_ndt60.png)
+  &--bishop-white
+    background-image: url(../png/Chess_blt60.png)
+  &--bishop-black
+    background-image: url(../png/Chess_bdt60.png)
+  &--queen-white
+    background-image: url(../png/Chess_qlt60.png)
+  &--queen-black
+    background-image: url(../png/Chess_qdt60.png)
+  &--king-white
+    background-image: url(../png/Chess_klt60.png)
+  &--king-black
+    background-image: url(../png/Chess_kdt60.png)
+  &--pawn-white
+    background-image: url(../png/Chess_plt60.png)
+  &--pawn-black
+    background-image: url(../png/Chess_pdt60.png)
+
+
+
