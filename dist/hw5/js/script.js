@@ -42,7 +42,7 @@ function initBoard() {
       row[0].innerText = letters[i - 91];
   }
 
-  // Заполняем цифрами левую и правую колонки.
+  // Заполняем цифрами левую и нижнюю колонки.
   for (var i = 11, count = 8; i < 82; i += 10, --count) {
       var row = document.getElementsByClassName('ch-item--' + i);
       row[0].classList.add('ch-item--' + 'grey');

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+html(lang="en")
+head
+  meta(charset="UTF-8")
+  title HW6
+  script(src="js/script.js")
+  link(rel="stylesheet", href="css/style.css")
+body
+  .wrapper-gallery
+    .gallery
+      - for(var i = 1; i <= 10; ++i)
+          .gallery-slot
+            img(src="jpg/small/" + i + ".jpg", class="image " + i)
+            button(id = i) Buy
+    .sidebar
+      .preview
+      .basket
+        .title
+          h2 Basket
+        .goods
+        .price
