@@ -16,7 +16,6 @@ function addEvents() {
 }
 
 // Процедура кликанья по картинкам
-
 function showBigImage(arg) {
 	var imgName = arg.target.className.split(' ')[1];
 	var bigImageName = BIG_IMAGES_FOLDER + imgName + '.jpg';
@@ -37,8 +36,15 @@ function showBigImage(arg) {
 	}
 }
 
+//// ВЕЛИКАЯ И МОГУЧАЯ КОРЗИНА ////
 
-// Процедуры работы с корзиной
+// Запускаем корзину. Функция вызывается по клику на кнопку.
+
+function initCart(arg) {
+	objCart.addToCart(arg);
+	objCart.countTotal();
+	objCart.printCart();
+}
 
 // Функция генерации цены товара
 function randomPrice() {
@@ -64,102 +70,50 @@ var objCart = {
 	goodsCart: [],
 	totalCart: 0,
 	addToCart: function(btn) {
-		// Формируем название товара соединяя good с ID кнопки.
-		var goodName = 'good' + btn.target.id;
-		// Если такой аргумент есть в объекте objGoods, добавляем этот аргумент в массив goodsCart 
 		for (var key in objGoods) {
-			if (key == goodName) {
-				this.goodsCart.push(objGoods[key]);
+			var goodName = 'good' + btn.target.id; // Формируем название товара соединяя good с ID кнопки.
+			var good = objGoods[key]; // Определяем товар по ключу
+			var goodIndex = this.goodsCart.indexOf(good); // Определяем индекс товара в корзине
+			var goodInCart = this.goodsCart[goodIndex]; // Дергаем по индексу массив товара из корзины. 
+			// Проверяем что товар существует и его нет в корзине.
+			if (key == goodName && goodIndex == -1) {
+				this.goodsCart.push(good); // Добавляем товар в корзину
+				goodIndex = this.goodsCart.indexOf(good); // Узнаем индекс нового элемента в корзине
+				goodInCart = this.goodsCart[goodIndex]; // Дергаем элемент по индексу
+				goodInCart.push(1); // Выставляем количество равное еденице
+				// Если товар в корзине уже есть - увеличиваем количество на 1.
+			} else if (key == goodName && goodIndex > -1) {
+					goodInCart[2] += 1; // Увеличиваем количество товара на 1
 			}
 		}
-		this.goodsCart.sort();
 	},
+	// Пересчитываем общую сумму
 	countTotal: function() {
 		for (var i = 0; i < this.goodsCart.length; i++) {
 			var good = this.goodsCart[i];
 			this.totalCart += good[1];
 		}
 	},
+	// Печатаем корзину
 	printCart: function() {
 		var basketDIV = document.getElementsByClassName('goods')[0];
 		var totalDIV = document.getElementsByClassName('price')[0];
-		var basketLine = document.createElement('div');
-		var current = null;
-		var qnt = 0;
+		
+		basketDIV.innerHTML = '';
 
 		for (var i = 0; i < this.goodsCart.length; i++) {
 			var good = this.goodsCart[i];
-			if (good != current) {
-				if (qnt > 0) {
-					console.log(current + ' comes --> ' + qnt + ' times');
-					good[2] = qnt;
-					// basketLine.innerHTML = 'Good: ' + i[0] + ' Price: ' + i[1] + ' QNT ' + i[2];
-					// basketLine.className = i;
-					// objCart.totalCart += i[1]
-					// basketDIV.appendChild(basketLine);
-					// totalDIV.innerHTML = objCart.totalCart;
-				}
-				current = this.goodsCart[i];
-				qnt = 1;
-			} else {
-			qnt++;
-			}
-		}
-		if (qnt > 0) {
-			good[2] = qnt;
-			console.log(current + ' comes --> ' + qnt + ' times');
+			var basketLine = document.createElement('div');
+			var name = good[0];
+			var price = good[1];
+			var qnt = good[2];
+			var total = this.totalCart;
+
+			basketLine.innerHTML = (i + 1) + '. ' + name + ' - ' + price + 'р. ' + ' / ' + qnt + ' шт.';
+			basketDIV.appendChild(basketLine);
+			totalDIV.innerHTML = 'Всего: '+ total + 'р.';
 		}
 	}
 };
-
-function initCart(arg) {
-	objCart.addToCart(arg);
-	objCart.countTotal();
-	objCart.printCart();
-}
-// function addToCart(arg) {
-// 	var goodID = 'good' + arg.target.id;
-// 	var basket = document.getElementsByClassName('goods')[0];
-// 	for (var key in objGoods) {
-// 		if (key == goodID) {
-// 			objCart.goodsCart.push(objGoods[key]);
-// 		}
-// 	}
-// 	basket.innerHTML = '';
-// 	parseBasket(objCart.goodsCart);
-// }
-
-// function parseBasket(cart) {
-// 	var basketDIV = document.getElementsByClassName('goods')[0];
-// 	var totalDIV = document.getElementsByClassName('price')[0];
-
-// 	var current = null;
-// 	var qnt = 0;
-// 	var result = [];
-// 	cart.sort();
-
-// 	for (var i = 0; i < cart.length; i++) {
-// 		if (cart[i] != current) {
-// 			if (qnt > 0) {
-// 				result.push(current);
-// 				cart[i].splice(2, 1, qnt);
-// 			}
-// 			current = cart[i];
-// 			qnt = 1;
-// 		} else {
-// 				qnt++;
-// 		}
-// 	}
-// 	result.forEach(function(i) {
-// 		var basketLine = document.createElement('li');
-// 		basketLine.innerHTML = 'Good: ' + i[0] + ' Price: ' + i[1] + ' QNT ' + i[2];
-// 		basketLine.className = i;
-// 		objCart.totalCart += i[1]
-// 		basketDIV.appendChild(basketLine);
-// 		totalDIV.innerHTML = objCart.totalCart;
-// 		console.log(result);
-// 	})
-// }
-
 
 window.onload = addEvents;
