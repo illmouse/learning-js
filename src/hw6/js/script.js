@@ -1,74 +1,28 @@
 'use sctrict'
 
-// Создаем прототип для товаров
-class goodsProto {
-	constructor(name, price) {
-		this.name = name;
-		this.price = price;
-	}
-}
+// Загрузка переменных, которых определяяются сразу после загрузки старницы
 
-// Функция генерации цены товара
-function randomPrice(min, max) {
-	return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-// Создаем товары и генерируем цены для них
-var good1 = new goodsProto('good1', randomPrice(100, 5000));
-var good2 = new goodsProto('good2', randomPrice(100, 5000));
-var good3 = new goodsProto('good3', randomPrice(100, 5000));
-var good4 = new goodsProto('good4', randomPrice(100, 5000));
-var good5 = new goodsProto('good5', randomPrice(100, 5000));
-var good6 = new goodsProto('good6', randomPrice(100, 5000));
-var good7 = new goodsProto('good7', randomPrice(100, 5000));
-var good8 = new goodsProto('good8', randomPrice(100, 5000));
-var good9 = new goodsProto('good9', randomPrice(100, 5000));
-var good10 = new goodsProto('good10', randomPrice(100, 5000));
-
-// Создаем корзину
-var objCart = {
-	goodsCart: [],
-	totalCart: ''
-}
-
-// objCart.goodsCart.push(good5.name);
-// objCart.goodsCart.push(good3.name);
-// objCart.goodsCart.push(good2.name);
-
-// objCart.goodsCart.forEach(writeBasket);
-function addToCart(arg) {
-	var goodID = arg.target.id;
-	objCart.goodsCart.push('good' + 'goodID'.name);
-	objCart.goodsCart[objCart.goodsCart.lenght - 1];
-}
-function writeBasket(arg) {
-	var basket = document.getElementsByClassName('goods')[0];
-	var basketLine = document.createElement('li');
-	basketLine.innerHTML = arg;
-	basket.innerHTML = '';
-	basket.appendChild(basketLine);
-}
-
-
-// Процедура кликанья по картинкам
 var BIG_IMAGES_FOLDER = 'jpg/';
 
-function init() {
+function addEvents() {
 	var images = document.getElementsByTagName('img');
 	var buttons = document.getElementsByTagName('button');
 	for (var i = 0, max_i = images.length; i < max_i; i++) {
 		images[i].addEventListener('click', showBigImage);
 	}
 	for (var i = 0, max_i = buttons.length; i < max_i; i++) {
-		buttons[i].addEventListener('click', addToCart);
+		buttons[i].addEventListener('click', initCart);
 	}
 }
+
+// Процедура кликанья по картинкам
 
 function showBigImage(arg) {
 	var imgName = arg.target.className.split(' ')[1];
 	var bigImageName = BIG_IMAGES_FOLDER + imgName + '.jpg';
 	var sourceDiv = document.getElementsByClassName('preview')[0];
 	var bigImage = document.createElement('img');
+	bigImage.src = bigImageName;
 
 	// Проверка существует ли картинка.
 	bigImage.onerror = function() {
@@ -81,8 +35,131 @@ function showBigImage(arg) {
 		sourceDiv.innerHTML = '';
 		sourceDiv.appendChild(bigImage);
 	}
-
-	bigImage.src = bigImageName;
 }
 
-window.onload = init;
+
+// Процедуры работы с корзиной
+
+// Функция генерации цены товара
+function randomPrice() {
+	return Math.floor(Math.random() * (5000 - 100 + 1)) + 100;
+}
+
+// Товары
+var objGoods = {
+	good1: ['SmthNice', randomPrice()],
+	good2: ['SmthSweet', randomPrice()],
+	good3: ['SmthStrange', randomPrice()],
+	good4: ['SmthGreat', randomPrice()],
+	good5: ['SmthYours', randomPrice()],
+	good6: ['SmthMine', randomPrice()],
+	good7: ['SmthCheap', randomPrice()],
+	good8: ['SmthPriceless', randomPrice()],
+	good9: ['SmthBig', randomPrice()],
+	good10: ['SmthSmall', randomPrice()]
+};
+
+// Корзина
+var objCart = {
+	goodsCart: [],
+	totalCart: 0,
+	addToCart: function(btn) {
+		// Формируем название товара соединяя good с ID кнопки.
+		var goodName = 'good' + btn.target.id;
+		// Если такой аргумент есть в объекте objGoods, добавляем этот аргумент в массив goodsCart 
+		for (var key in objGoods) {
+			if (key == goodName) {
+				this.goodsCart.push(objGoods[key]);
+			}
+		}
+		this.goodsCart.sort();
+	},
+	countTotal: function() {
+		for (var i = 0; i < this.goodsCart.length; i++) {
+			var good = this.goodsCart[i];
+			this.totalCart += good[1];
+		}
+	},
+	printCart: function() {
+		var basketDIV = document.getElementsByClassName('goods')[0];
+		var totalDIV = document.getElementsByClassName('price')[0];
+		var basketLine = document.createElement('div');
+		var current = null;
+		var qnt = 0;
+
+		for (var i = 0; i < this.goodsCart.length; i++) {
+			var good = this.goodsCart[i];
+			if (good != current) {
+				if (qnt > 0) {
+					console.log(current + ' comes --> ' + qnt + ' times');
+					good[2] = qnt;
+					// basketLine.innerHTML = 'Good: ' + i[0] + ' Price: ' + i[1] + ' QNT ' + i[2];
+					// basketLine.className = i;
+					// objCart.totalCart += i[1]
+					// basketDIV.appendChild(basketLine);
+					// totalDIV.innerHTML = objCart.totalCart;
+				}
+				current = this.goodsCart[i];
+				qnt = 1;
+			} else {
+			qnt++;
+			}
+		}
+		if (qnt > 0) {
+			good[2] = qnt;
+			console.log(current + ' comes --> ' + qnt + ' times');
+		}
+	}
+};
+
+function initCart(arg) {
+	objCart.addToCart(arg);
+	objCart.countTotal();
+	objCart.printCart();
+}
+// function addToCart(arg) {
+// 	var goodID = 'good' + arg.target.id;
+// 	var basket = document.getElementsByClassName('goods')[0];
+// 	for (var key in objGoods) {
+// 		if (key == goodID) {
+// 			objCart.goodsCart.push(objGoods[key]);
+// 		}
+// 	}
+// 	basket.innerHTML = '';
+// 	parseBasket(objCart.goodsCart);
+// }
+
+// function parseBasket(cart) {
+// 	var basketDIV = document.getElementsByClassName('goods')[0];
+// 	var totalDIV = document.getElementsByClassName('price')[0];
+
+// 	var current = null;
+// 	var qnt = 0;
+// 	var result = [];
+// 	cart.sort();
+
+// 	for (var i = 0; i < cart.length; i++) {
+// 		if (cart[i] != current) {
+// 			if (qnt > 0) {
+// 				result.push(current);
+// 				cart[i].splice(2, 1, qnt);
+// 			}
+// 			current = cart[i];
+// 			qnt = 1;
+// 		} else {
+// 				qnt++;
+// 		}
+// 	}
+// 	result.forEach(function(i) {
+// 		var basketLine = document.createElement('li');
+// 		basketLine.innerHTML = 'Good: ' + i[0] + ' Price: ' + i[1] + ' QNT ' + i[2];
+// 		basketLine.className = i;
+// 		objCart.totalCart += i[1]
+// 		basketDIV.appendChild(basketLine);
+// 		totalDIV.innerHTML = objCart.totalCart;
+// 		console.log(result);
+// 	})
+// }
+
+
+window.onload = addEvents;
