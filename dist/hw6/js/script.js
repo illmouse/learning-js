@@ -1,9 +1,7 @@
 'use sctrict'
 
-// Загрузка переменных, которых определяяются сразу после загрузки старницы
 
-var BIG_IMAGES_FOLDER = 'jpg/';
-
+// Ловим события с изображений и кнопок
 function addEvents() {
 	var images = document.getElementsByTagName('img');
 	var buttons = document.getElementsByTagName('button');
@@ -15,24 +13,26 @@ function addEvents() {
 	}
 }
 
-// Процедура кликанья по картинкам
+//// РАБОТА С КАРТИНКАМИ ////
+
+// Процедура вывода большой кратинки
 function showBigImage(arg) {
+	var imgFolder = 'jpg/';
 	var imgName = arg.target.className.split(' ')[1];
-	var bigImageName = BIG_IMAGES_FOLDER + imgName + '.jpg';
-	var sourceDiv = document.getElementsByClassName('preview')[0];
-	var bigImage = document.createElement('img');
-	bigImage.src = bigImageName;
+	var imgBigDIV = document.getElementsByClassName('preview')[0];
+	var imgBig = document.createElement('img');
+	imgBig.src = imgFolder + imgName + '.jpg';
 
 	// Проверка существует ли картинка.
-	bigImage.onerror = function() {
-		sourceDiv.innerHTML = '<h2>' + 'NO SUCH IMAGE!' + '</h2>';
+	imgBig.onerror = function() {
+		imgBigDIV.innerHTML = '<h2>' + 'NO SUCH IMAGE!' + '</h2>';
 	}
 
-	bigImage.onload = function() {
-		bigImage.style.height = '100%';
-		bigImage.style.width = '100%';
-		sourceDiv.innerHTML = '';
-		sourceDiv.appendChild(bigImage);
+	imgBig.onload = function() {
+		imgBig.style.height = '100%';
+		imgBig.style.width = '100%';
+		imgBigDIV.innerHTML = '';
+		imgBigDIV.appendChild(imgBig);
 	}
 }
 
@@ -69,13 +69,13 @@ var objGoods = {
 var objCart = {
 	goodsCart: [],
 	totalPrice: 0,
-	totalCount: 0,
+	totalQnt: 0,
 	addToCart: function(btn) {
 		for (var key in objGoods) {
 			var goodName = 'good' + btn.target.id; // Формируем название товара соединяя good с ID кнопки.
 			var good = objGoods[key]; // Определяем товар по ключу
 			var goodIndex = this.goodsCart.indexOf(good); // Определяем индекс товара в корзине
-			var goodInCart = this.goodsCart[goodIndex]; // Дергаем по индексу массив товара из корзины. 
+			var goodInCart = this.goodsCart[goodIndex]; // Дергаем по индексу массив товаров из корзины. 
 			// Проверяем что товар существует и его нет в корзине.
 			if (key == goodName && goodIndex == -1) {
 				this.goodsCart.push(good); // Добавляем товар в корзину
@@ -84,14 +84,13 @@ var objCart = {
 				goodInCart.push(1); // Выставляем количество равное еденице
 				// Если товар в корзине уже есть - увеличиваем количество на 1.
 			} else if (key == goodName && goodIndex > -1) {
-					goodInCart[2] += 1; // Увеличиваем количество товара на 1
+					goodInCart[2] += 1;
 			}
 		}
 	},
-	// Пересчитываем общую сумму
 	countTotal: function() {
 		// Обнуляем счетчики
-		this.totalCount = 0;
+		this.totalQnt = 0;
 		this.totalPrice = 0;
 		// Для каждого элемента корзины пересчитываем цену и количество
 		for (var i = 0; i < this.goodsCart.length; i++) {
@@ -102,7 +101,7 @@ var objCart = {
 			if (good[2] > 0) {
 				this.totalPrice += (goodPrice * goodQnt);
 			}
-			this.totalCount += goodQnt;
+			this.totalQnt += goodQnt;
 		}
 	},
 	// Печатаем корзину
@@ -119,12 +118,12 @@ var objCart = {
 			var price = good[1];
 			var qnt = good[2];
 			var totalPrice = this.totalPrice;
-			var totalCount = this.totalCount;
+			var totalQnt = this.totalQnt;
 
 			cartLine.innerHTML = (i + 1) + '. ' + name + ' - ' + price + 'р. ' + ' / ' + qnt + ' шт.';
 			cartLine.className = 'cart-line';
 			cartDIV.appendChild(cartLine);
-			totalDIV.innerHTML = 'Всего: '+ totalPrice + 'р.' + ' / Товаров в корзине: ' + totalCount;
+			totalDIV.innerHTML = 'Всего: '+ totalPrice + 'р.' + ' / Товаров в корзине: ' + totalQnt;
 		}
 	}
 };
