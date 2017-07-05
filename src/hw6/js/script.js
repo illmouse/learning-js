@@ -29,8 +29,8 @@ function showBigImage(arg) {
 	}
 
 	bigImage.onload = function() {
-		bigImage.style.height = '300px';
-		bigImage.style.width = '550px';
+		bigImage.style.height = '100%';
+		bigImage.style.width = '100%';
 		sourceDiv.innerHTML = '';
 		sourceDiv.appendChild(bigImage);
 	}
@@ -38,7 +38,7 @@ function showBigImage(arg) {
 
 //// ВЕЛИКАЯ И МОГУЧАЯ КОРЗИНА ////
 
-// Запускаем корзину. Функция вызывается по клику на кнопку.
+// Запускаем корзину. Функция вызывается по клику на кнопку Buy.
 
 function initCart(arg) {
 	objCart.addToCart(arg);
@@ -68,7 +68,8 @@ var objGoods = {
 // Корзина
 var objCart = {
 	goodsCart: [],
-	totalCart: 0,
+	totalPrice: 0,
+	totalCount: 0,
 	addToCart: function(btn) {
 		for (var key in objGoods) {
 			var goodName = 'good' + btn.target.id; // Формируем название товара соединяя good с ID кнопки.
@@ -89,29 +90,41 @@ var objCart = {
 	},
 	// Пересчитываем общую сумму
 	countTotal: function() {
+		// Обнуляем счетчики
+		this.totalCount = 0;
+		this.totalPrice = 0;
+		// Для каждого элемента корзины пересчитываем цену и количество
 		for (var i = 0; i < this.goodsCart.length; i++) {
 			var good = this.goodsCart[i];
-			this.totalCart += good[1];
+			var goodPrice = good[1];
+			var goodQnt = good[2];
+			// Перемножаем цену на количество и добавляем к счетчику totalPrice
+			if (good[2] > 0) {
+				this.totalPrice += (goodPrice * goodQnt);
+			}
+			this.totalCount += goodQnt;
 		}
 	},
 	// Печатаем корзину
 	printCart: function() {
-		var basketDIV = document.getElementsByClassName('goods')[0];
+		var cartDIV = document.getElementsByClassName('goods')[0];
 		var totalDIV = document.getElementsByClassName('price')[0];
 		
-		basketDIV.innerHTML = '';
+		cartDIV.innerHTML = '';
 
 		for (var i = 0; i < this.goodsCart.length; i++) {
 			var good = this.goodsCart[i];
-			var basketLine = document.createElement('div');
+			var cartLine = document.createElement('div');
 			var name = good[0];
 			var price = good[1];
 			var qnt = good[2];
-			var total = this.totalCart;
+			var totalPrice = this.totalPrice;
+			var totalCount = this.totalCount;
 
-			basketLine.innerHTML = (i + 1) + '. ' + name + ' - ' + price + 'р. ' + ' / ' + qnt + ' шт.';
-			basketDIV.appendChild(basketLine);
-			totalDIV.innerHTML = 'Всего: '+ total + 'р.';
+			cartLine.innerHTML = (i + 1) + '. ' + name + ' - ' + price + 'р. ' + ' / ' + qnt + ' шт.';
+			cartLine.className = 'cart-line';
+			cartDIV.appendChild(cartLine);
+			totalDIV.innerHTML = 'Всего: '+ totalPrice + 'р.' + ' / Товаров в корзине: ' + totalCount;
 		}
 	}
 };
