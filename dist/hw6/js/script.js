@@ -24,7 +24,7 @@ function showBigImage(arg) {
 
   // Проверка существует ли картинка.
   imgBig.onerror = function() {
-    imgBigDIV.innerHTML = '<h2>' + 'NO SUCH IMAGE!' + '</h2>';
+    imgBigDIV.innerHTML = '<h2>' + 'Oops, we can&apos;t find your image!' + '</h2>';
   }
 
   imgBig.onload = function() {
