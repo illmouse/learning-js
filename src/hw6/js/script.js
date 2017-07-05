@@ -1,6 +1,5 @@
 'use sctrict'
 
-
 // Ловим события с изображений и кнопок
 function addEvents() {
   var images = document.getElementsByTagName('img');
