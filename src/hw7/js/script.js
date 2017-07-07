@@ -56,9 +56,25 @@
       var snake_coords = snake_head_classes[1].split("-");
       var coord_x = parseInt(snake_coords[1]);
       var coord_y = parseInt(snake_coords[2]);
-      //console.log(coord_x, coord_y);
-
+      var coord_x_prev = coord_x;
+      var coord_y_prev = coord_y;
       var new_unit;
+
+      switch (true) {
+        case (coord_x == (FIELD_SIZE_X - FIELD_SIZE_X) && coord_x_prev == (coord_x + 1)):
+          coord_x = FIELD_SIZE_X;
+          break;
+        case (coord_x == (FIELD_SIZE_X - 1) && coord_x_prev == (coord_x - 1)):
+          coord_x -= FIELD_SIZE_X;
+          break;
+        // case (coord_y == (FIELD_SIZE_Y - FIELD_SIZE_Y)):
+        //   coord_y += FIELD_SIZE_Y;
+        //   break;
+        // case (coord_y == (FIELD_SIZE_Y - 1)):
+        //   coord_y -= FIELD_SIZE_Y;
+        //   break;
+      }
+
       switch (direction) {
         case 'x-':
           new_unit = document.getElementsByClassName("cell-" + (coord_x - 1) + "-" + coord_y)[0];
@@ -74,7 +90,8 @@
           break;
       }
 
-      if (!isSnakeUnit(new_unit) && new_unit !== undefined) {
+      // if (!isSnakeUnit(new_unit) && new_unit !== undefined) {
+      if (!isSnakeUnit(new_unit)) {
         new_unit.setAttribute("class", new_unit.getAttribute("class") + " snake-unit");
         snake.unshift(new_unit);
 
@@ -132,20 +149,14 @@
         var food_x = Math.floor(Math.random() * FIELD_SIZE_X);
         var food_y = Math.floor(Math.random() * FIELD_SIZE_Y);
         var food_cell = document.getElementsByClassName("cell-" + food_x + "-" + food_y)[0];
-        var food_cell_classes = food_cell.getAttribute("class").split(" ");
+        var food_cell_classes = food_cell.getAttribute("class");
 
         if (!food_cell_classes.includes("snake-unit")) {
-          var classes = "";
-          for (var i = 0; i < food_cell_classes.length; i++) {
-            classes += food_cell_classes[i] + " ";
-          }
-          food_cell.setAttribute("class", classes + " food-unit");
+          food_cell.setAttribute("class", food_cell_classes + " food-unit");
           foodCreated = true;
+          }
         }
-
       }
-
-    }
 
     function haveFood(unit) {
       var check = false;
