@@ -53,26 +53,29 @@
 
     function snakeMove() {
       var snake_head_classes = snake[0].getAttribute("class").split(" ");
+      var snake_head_prev = snake[1].getAttribute("class").split(" ");
       var snake_coords = snake_head_classes[1].split("-");
+      var snake_coords_prev = snake_head_prev[1].split("-");
       var coord_x = parseInt(snake_coords[1]);
       var coord_y = parseInt(snake_coords[2]);
-      var coord_x_prev = coord_x;
-      var coord_y_prev = coord_y;
+      var coord_x_prev = parseInt(snake_coords_prev[1]);
+      var coord_y_prev = parseInt(snake_coords_prev[2]);
       var new_unit;
-
+      console.log("coord_x: ", coord_x);
+      console.log("coord_x_prev: ", coord_x_prev);
       switch (true) {
-        case (coord_x == (FIELD_SIZE_X - FIELD_SIZE_X) && coord_x_prev == (coord_x + 1)):
+        case (coord_x == (FIELD_SIZE_X - FIELD_SIZE_X) && coord_x_prev == coord_x + 1):
           coord_x = FIELD_SIZE_X;
           break;
-        case (coord_x == (FIELD_SIZE_X - 1) && coord_x_prev == (coord_x - 1)):
+        case (coord_x == (FIELD_SIZE_X - 1) && coord_x_prev == coord_x - 1):
           coord_x -= FIELD_SIZE_X;
           break;
-        // case (coord_y == (FIELD_SIZE_Y - FIELD_SIZE_Y)):
-        //   coord_y += FIELD_SIZE_Y;
-        //   break;
-        // case (coord_y == (FIELD_SIZE_Y - 1)):
-        //   coord_y -= FIELD_SIZE_Y;
-        //   break;
+        case (coord_y == (FIELD_SIZE_Y - FIELD_SIZE_Y) && coord_y_prev == coord_y + 1):
+          coord_y = FIELD_SIZE_Y;
+          break;
+        case (coord_y == (FIELD_SIZE_Y - 1) && coord_y_prev == coord_y - 1):
+          coord_y -= FIELD_SIZE_Y;
+          break;
       }
 
       switch (direction) {
