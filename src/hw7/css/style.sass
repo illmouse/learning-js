@@ -2,10 +2,17 @@
   margin: 0
   padding: 0
   overflow: hidden
+  border-sizing: border-box
 
 #snake-field
-  background: black
+  background-color: black
   border: 1px solid green
+#score-field
+  width: 150px
+  padding: 15px
+  background-color: green
+  color: white
+  text-align: center
 
 #start-game, #new-game
   width: 150px
@@ -27,7 +34,10 @@ td.game-table-cell
   border-collapse: collapse
 
 .snake-unit 
-  background: white
+  background-color: white
 
 .food-unit 
-  background: red
+  background-color: red
+
+.wall-unit
+  background-color: yellow
