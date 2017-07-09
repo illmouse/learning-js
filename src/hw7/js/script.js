@@ -150,7 +150,7 @@
 
     function createFood() {
       var foodCreated = false;
-      
+
       while (!foodCreated) {
         var food_x = Math.floor(Math.random() * FIELD_SIZE_X);
         var food_y = Math.floor(Math.random() * FIELD_SIZE_Y);
@@ -171,18 +171,15 @@
       }
       wall_units.splice(0, wall_units_qnt);
 
-      while (!wallCreated) {
-        for (var i = 0; i < wall_units_qnt; i++) {
-          var wall_x = Math.floor(Math.random() * FIELD_SIZE_X);
-          var wall_y = Math.floor(Math.random() * FIELD_SIZE_Y);
-          var wall_cell = document.getElementsByClassName('cell-' + wall_x + '-' + wall_y)[0];
-          var wall_cell_classes = wall_cell.getAttribute('class').split(' ');
+      while (wall_units.length < wall_units_qnt) {
+        var wall_x = Math.floor(Math.random() * FIELD_SIZE_X);
+        var wall_y = Math.floor(Math.random() * FIELD_SIZE_Y);
+        var wall_cell = document.getElementsByClassName('cell-' + wall_x + '-' + wall_y)[0];
+        var wall_cell_classes = wall_cell.getAttribute('class').split(' ');
 
-          if (wall_cell_classes.length = 2) {
-            wall_cell.classList.add('wall-unit');
-            wall_units.push(wall_cell);
-          }
-          wallCreated = true;
+        if (wall_cell_classes.length == 2) {
+          wall_cell.classList.add('wall-unit');
+          wall_units.push(wall_cell);
         }
       }
     }
