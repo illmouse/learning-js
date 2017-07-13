@@ -1,20 +1,15 @@
 *
   margin: 0
   padding: 0
-  overflow: hidden
+  // overflow: hidden
   border-sizing: border-box
 
 #snake-field
   background-color: black
   border: 1px solid green
-#score-field
-  width: 150px
-  padding: 15px
-  background-color: green
-  color: white
-  text-align: center
+  width: 100%
 
-#start-game, #new-game
+#start-game, #new-game, #score-field
   width: 150px
   padding: 15px
   color: white
@@ -23,6 +18,7 @@
   cursor: pointer
   float: left
   margin-right: 10px
+  margin-top: 5px
 
 .game-table 
   border-collapse: collapse
@@ -41,3 +37,11 @@ td.game-table-cell
 
 .wall-unit
   background-color: yellow
+
+.qa
+  display: flex
+  flex-wrap: wrap
+  width: 100%
+  margin: 60px
+p
+  padding: 10px

@@ -8,13 +8,6 @@
     var wall_units = [];
     var wall_units_qnt = 4;
 
-    function init() {
-      prepareGameField();
-      document.getElementById('start-game').addEventListener('click', startGame);
-      document.getElementById('new-game').addEventListener('click', restartGame);
-      addEventListener('keydown', changeDirection);
-    }
-
     function prepareGameField() {
       var game_table = document.createElement('table');
       game_table.classList.add('game-table');
@@ -40,6 +33,9 @@
       }
 
       score = 0;
+      var score_field = document.getElementById('score-field');
+      score_field.innerText = ('Score: ' + score);
+
       snake = [];
       wall_units = [];
       direction = 'x-';
@@ -69,7 +65,6 @@
       snake.push(snake_tail);
     }
 
-    // Сфера реализована в данной функции
     function snakeMove() {
       var snake_head_classes = snake[0].getAttribute('class').split(' ');
       var snake_coords = snake_head_classes[1].split("-");
@@ -122,7 +117,6 @@
       } else {
         finishGame();
       }
-      
     }
 
     function isFree(new_unit) {
@@ -157,7 +151,6 @@
           }
           break;
       }
-
     }
 
     function finishGame() {
@@ -206,6 +199,7 @@
           wall_units.push(wall_cell);
         }
       }
+      wallCreated = true;
     }
 
     function haveFood(unit) {

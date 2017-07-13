@@ -12,32 +12,47 @@
   <div id="new-game">New game</div>
   <div id="score-field">Score: 0</div>
   <div class="qa">
-    <pre>if (!("a" in window)) {
-  var a = 1;
+    <p>
+      <pre>if (!("a" in window)) {
+ var a = 1;
 }
 alert(a);
-// undefined.
-var b = function a(x) {
+
+// undefined.</pre>
+    </p>
+    <p>
+      <pre>var b = function a(x) {
     x && a(--x);
 };
 alert(a);
-// undefined.
-function a(x) {
+
+// undefined.</pre>
+    </p>
+    <p>
+      <pre>function a(x) {
   return x * 2;
 }
 var a;
 alert(a);
-// Вернет переменную a
-function b(x, y, a) {
+
+// Вернет переменную a</pre>
+    </p>
+    <p>
+      <pre>function b(x, y, a) {
   arguments[2] = 10;
   alert(a);
 }
 b(1, 2, 3);
-// 10
-function a() {
+
+// 10</pre>
+    </p>
+    <p>
+      <pre>function a() {
   alert(this);
 }
 a.call(null);
+
 // null</pre>
+    </p>
   </div>
 </body>
