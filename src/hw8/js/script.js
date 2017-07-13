@@ -34,22 +34,27 @@
     }
 
     function startGame() {
-      // score = 0;
-      // snake = [];
-      // wall_units = [];
-      // direction = 'x-';
-      // gameIsRunning = true;
-      // cells = document.getElementsByTagName('td');
 
-      // for (i = 0; i < cells.length; i++) {
-      //   cells[i].classList.remove('snake-unit', 'food-unit', 'wall-unit');
-      // }
-      location.reload();
+      if (gameIsRunning) {
+        finishGame();
+      }
+
+      score = 0;
+      snake = [];
+      wall_units = [];
+      direction = 'x-';
+      gameIsRunning = true;
+      cells = document.getElementsByTagName('td');
+
+      for (i = 0; i < cells.length; i++) {
+        cells[i].classList.remove('snake-unit', 'food-unit', 'wall-unit');
+      }
+
       snakeRender();
 
       snake_timer = setInterval(snakeMove, SNAKE_SPEED);
       wall_timer = setInterval(createWall, 10000);
-      setTimeout(createFood, 5000);
+      food_timer = setTimeout(createFood, 5000);
     }
 
     function snakeRender() {
@@ -132,16 +137,24 @@
     function changeDirection(e) {
       switch (e.keyCode) {
         case 37:
-          direction = 'y-';
+          if (direction != 'y+') {
+            direction = 'y-';
+          }
           break;
         case 38:
-          direction = 'x-';
+          if (direction != 'x+') {
+            direction = 'x-';
+          }
           break;
         case 39:
-          direction = 'y+';
+          if (direction != 'y-') {
+            direction = 'y+';
+          }
           break;
         case 40:
-          direction = 'x+';
+          if (direction != 'x-') {
+            direction = 'x+';
+          }
           break;
       }
 
@@ -151,6 +164,7 @@
       gameIsRunning = false;
       clearInterval(snake_timer);
       clearInterval(wall_timer);
+      clearTimeout(food_timer);
       alert('Game over! Score is ' + score);
     }
 
@@ -208,4 +222,9 @@
       return check;
     }
 
-    window.onload = init;
+    window.onload = function() {
+      prepareGameField();
+      document.getElementById('start-game').addEventListener('click', startGame);
+      document.getElementById('new-game').addEventListener('click', restartGame);
+      addEventListener('keydown', changeDirection);
+    }

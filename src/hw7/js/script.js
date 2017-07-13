@@ -34,7 +34,17 @@
     }
 
     function startGame() {
-      gameIsRunning = true;
+      // score = 0;
+      // snake = [];
+      // wall_units = [];
+      // direction = 'x-';
+      // gameIsRunning = true;
+      // cells = document.getElementsByTagName('td');
+
+      // for (i = 0; i < cells.length; i++) {
+      //   cells[i].classList.remove('snake-unit', 'food-unit', 'wall-unit');
+      // }
+      location.reload();
       snakeRender();
 
       snake_timer = setInterval(snakeMove, SNAKE_SPEED);
