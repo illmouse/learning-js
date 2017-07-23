@@ -17,7 +17,7 @@ let pug_in = 'src/**/!(_)*.pug';
 let pug_watch = 'src/**/*.pug';
 let pug_out = 'dist';
 
-let js_in = 'src/**/*.js';
+let js_in = 'src/**/*.js*';
 let js_out = 'dist';
 
 let show_notifications = true; //dont show notifications when BS starts
@@ -59,8 +59,15 @@ function moveJS() {
 function runBrowserSync() {
     browserSync({
         server: {
-            baseDir: bs_baseDir
+            baseDir: bs_baseDir,
+            middleware: [
+                function (req, res, next) {
+                    res.setHeader('Access-Control-Allow-Origin', '*');
+                    next();
+                }
+            ]
         },
+        cors: true,
         notify: true
     });
     show_notifications = true;

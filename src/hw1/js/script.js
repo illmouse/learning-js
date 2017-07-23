@@ -38,19 +38,6 @@ MenuItem.prototype.render = function() {
     return menuItem;
 }
 
-let itemIndex = 0; // Для автоматической идексации объектов.
-let m_items = {};
-m_items[itemIndex] = new MenuItem('1', '/', 'Главная');
-m_items[itemIndex] = new MenuItem('1.1', '/catalogue/', 'Каталог 1.1');
-m_items[itemIndex] = new MenuItem('1.2', '/gallery/', 'Галерея 1.2');
-m_items[itemIndex] = new MenuItem('1.2.1', '/gallery/', 'Галерея 1.2.1');
-m_items[itemIndex] = new MenuItem('1.2.1.1', '/gallery/', 'Галерея 1.2.1.1');
-m_items[itemIndex] = new MenuItem('1.2.1.2', '/gallery/', 'Галерея 1.2.1.2');
-m_items[itemIndex] = new MenuItem('1.3', '/gallery/', 'Галерея 1.3');
-m_items[itemIndex] = new MenuItem('2', '/gallery/', 'Галерея 2');
-m_items[itemIndex] = new MenuItem('3', '/gallery/', 'Галерея 3');
-
-
 Menu.prototype.render = function() {
 
     let menuBlock = document.createElement('ul');
@@ -87,5 +74,29 @@ Menu.prototype.render = function() {
     }
 }
 
+let itemIndex = 0; // Для автоматической идексации объектов.
+let m_items = {};
+m_items[itemIndex] = new MenuItem('1', '/', 'Главная');
+m_items[itemIndex] = new MenuItem('2', '/gallery/', 'Галерея');
+m_items[itemIndex] = new MenuItem('2.1', '/gallery2/', 'Галерея 1.2');
+m_items[itemIndex] = new MenuItem('2.1.1', '/gallery3/', 'Галерея 1.2.1');
+m_items[itemIndex] = new MenuItem('2.3', '/gallery4/', 'Галерея 1.3');
+m_items[itemIndex] = new MenuItem('3', '/tires/', 'Шины');
+m_items[itemIndex] = new MenuItem('3.1', '/pokrishki/', 'Покрышки');
+m_items[itemIndex] = new MenuItem('4', '/lk/', 'Личный кабинет');
+
 let menu = new Menu('menu_lvl-0', 'menu_lvl-0', m_items);
 menu.render();
+
+
+xhr = new XMLHttpRequest();
+xhr.open('GET', 'json/menu.json', true);
+xhr.send();
+if (xhr.status != 200) {
+  // обработать ошибку
+  console.log( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
+} else {
+  // вывести результат
+  console.log( xhr.responseText ); // responseText -- текст ответа.
+}
+
