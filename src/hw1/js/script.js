@@ -88,15 +88,3 @@ m_items[itemIndex] = new MenuItem('4', '/lk/', 'Личный кабинет');
 let menu = new Menu('menu_lvl-0', 'menu_lvl-0', m_items);
 menu.render();
 
-
-xhr = new XMLHttpRequest();
-xhr.open('GET', 'json/menu.json', true);
-xhr.send();
-if (xhr.status != 200) {
-  // обработать ошибку
-  console.log( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
-} else {
-  // вывести результат
-  console.log( xhr.responseText ); // responseText -- текст ответа.
-}
-
