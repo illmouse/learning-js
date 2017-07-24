@@ -2,24 +2,6 @@
 
 let itemIndex = 0; // Для автоматической идексации объектов.
 let m_items = {};
-xhr = new XMLHttpRequest();
-xhr.open('GET', 'json/menu.json');
-
-xhr.onload = function() {
-    if (xhr.readyState != 4) {
-        alert(xhr.readyState + ': ' + xhr.statusText); // пример вывода: 404: Not Found
-    } else {
-        let new_m_items = JSON.parse(xhr.responseText);
-        // console.log(new_m_items);
-        for (let key in new_m_items) {
-          m_items[itemIndex] = new MenuItem(new_m_items[key].itemPlace, new_m_items[key].itemHref, new_m_items[key].itemName);
-        }
-      let menu = new Menu('menu_lvl-0', 'menu_lvl-0', m_items);
-      menu.render();
-    }
-}
-
-xhr.send();
 
 function Container() {
     this.id = '';
@@ -50,6 +32,7 @@ function MenuItem(itemPlace, itemHref, itemName) {
 }
 MenuItem.prototype = Object.create(Container.prototype);
 MenuItem.prototype.constructor = MenuItem;
+
 
 MenuItem.prototype.render = function() {
     let menuItem = document.createElement('li');
@@ -95,5 +78,45 @@ Menu.prototype.render = function() {
     }
 }
 
+function initMenu() {
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', 'json/menu.json');
 
+  xhr.onload = function() {
+      if (xhr.readyState != 4) {
+          alert(xhr.readyState + ': ' + xhr.statusText);
+      } else {
+          let new_m_items = JSON.parse(xhr.responseText);
+          for (let key in new_m_items) {
+            m_items[itemIndex] = new MenuItem(new_m_items[key].itemPlace, new_m_items[key].itemHref, new_m_items[key].itemName);
+          }
+        let menu = new Menu('menu_lvl-0', 'menu_lvl-0', m_items);
+        menu.render();
+      }
+  }
+  xhr.send();
+}
 
+function callGallery() {
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', 'json/gallery.json');
+
+  xhr.onload = function() {
+      // if (xhr.readyState != 4) {
+      //     alert(xhr.readyState + ': ' + xhr.statusText); // пример вывода: 404: Not Found
+      // } else {
+      //     let new_m_items = JSON.parse(xhr.responseText);
+      //     // console.log(new_m_items);
+      //     for (let key in new_m_items) {
+      //       m_items[itemIndex] = new MenuItem(new_m_items[key].itemPlace, new_m_items[key].itemHref, new_m_items[key].itemName);
+      //     }
+      //   let menu = new Menu('menu_lvl-0', 'menu_lvl-0', m_items);
+      //   menu.render();
+      // }
+      console.log( xhr.responseText );
+  }
+  xhr.send();
+}
+
+initMenu();
+callGallery();
