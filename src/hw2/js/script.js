@@ -153,12 +153,30 @@ function initGallery() {
             g_items[galleryIndex] = new GalleryItem(new_g_items[key].itemThmb, new_g_items[key].itemSrc);
           }
         let gallery = new Gallery('gallery', 'gallery', g_items);
-        console.log(gallery);
         gallery.render();
       }
   }
   xhr.send();
 }
 
+function addEvents() {
+  let images = document.getElementsByTagName('img');
+  for (let i = 0, max_i = images.length; i < max_i; i++) {
+    images[i].addEventListener('click', showBigImage);
+  }
+}
+
+function showBigImage(arg) {
+  let srcFolder = "jpg/";
+  let imgSrc = this.src.split("/");
+  imgSrc = imgSrc[imgSrc.length - 1];
+  let strWindowFeatures = "location=yes,height=570,width=520,scrollbars=yes,status=yes";
+  let URL = srcFolder + imgSrc;
+  let win = window.open(URL, "_blank", strWindowFeatures);
+
+}
+
 initMenu();
 initGallery();
+
+window.onload = addEvents;
