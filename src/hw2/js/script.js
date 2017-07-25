@@ -167,7 +167,7 @@ function addEvents() {
 }
 
 function showBigImage(arg) {
-  let srcFolder = "jpg/";
+  let srcFolder = "img/";
   let imgSrc = this.src.split("/");
   imgSrc = imgSrc[imgSrc.length - 1];
   let strWindowFeatures = "location=yes,height=570,width=520,scrollbars=yes,status=yes";
