@@ -1,7 +1,9 @@
 'use sctrict'
 
-let itemIndex = 0; // Для автоматической идексации объектов.
+let menuIndex = 0; // Для автоматической идексации объектов.
+let galleryIndex = 0; // Для автоматической идексации объектов.
 let m_items = {};
+let g_items = {};
 
 function Container() {
     this.id = '';
@@ -21,26 +23,6 @@ function Menu(my_id, my_class, my_items) {
 }
 Menu.prototype = Object.create(Container.prototype);
 Menu.prototype.constructor = Menu;
-
-function MenuItem(itemPlace, itemHref, itemName) {
-    Container.call(this);
-    this.className = 'menu-item menu-item--' + itemPlace;
-    this.itemHref = itemHref;
-    this.itemName = itemName;
-    this.itemPlace = itemPlace;
-    itemIndex++;
-}
-MenuItem.prototype = Object.create(Container.prototype);
-MenuItem.prototype.constructor = MenuItem;
-
-
-MenuItem.prototype.render = function() {
-    let menuItem = document.createElement('li');
-    menuItem.className = this.className;
-    menuItem.href = this.itemHref;
-    menuItem.innerHTML = this.itemName;
-    return menuItem;
-}
 
 Menu.prototype.render = function() {
 
@@ -78,6 +60,67 @@ Menu.prototype.render = function() {
     }
 }
 
+function MenuItem(itemPlace, itemHref, itemName) {
+    Container.call(this);
+    this.className = 'menu-item menu-item--' + itemPlace;
+    this.itemHref = itemHref;
+    this.itemName = itemName;
+    this.itemPlace = itemPlace;
+    menuIndex++;
+}
+MenuItem.prototype = Object.create(Container.prototype);
+MenuItem.prototype.constructor = MenuItem;
+
+
+MenuItem.prototype.render = function() {
+    let menuItem = document.createElement('li');
+    menuItem.className = this.className;
+    menuItem.href = this.itemHref;
+    menuItem.innerHTML = this.itemName;
+    return menuItem;
+}
+
+function Gallery(my_id, my_class, my_items) {
+    Container.call(this);
+    this.id = my_id;
+    this.className = my_class;
+    this.items = my_items;
+}
+Gallery.prototype = Object.create(Container.prototype);
+Gallery.prototype.constructor = Gallery;
+
+Gallery.prototype.render = function() {
+
+    let galleryBlock = document.createElement('div');
+    galleryBlock.className = this.className;
+    galleryBlock.id = this.id;
+    document.body.appendChild(galleryBlock);
+    
+    for (let item in this.items) {
+        let itemObj = this.items[item];
+        let itemRendered = itemObj.render();
+
+        galleryBlock.appendChild(itemRendered);
+    }
+}
+
+function GalleryItem(itemThmb, itemSrc) {
+    Container.call(this);
+    this.className = 'gallery-item gallery-item--' + galleryIndex;
+    this.itemThmb = itemThmb;
+    this.itemSrc = itemSrc;
+    galleryIndex++;
+}
+GalleryItem.prototype = Object.create(Container.prototype);
+GalleryItem.prototype.constructor = GalleryItem;
+
+GalleryItem.prototype.render = function() {
+    let galleryItem = document.createElement('img');
+    galleryItem.className = this.className;
+    galleryItem.src = this.itemThmb;
+    return galleryItem;
+}
+
 function initMenu() {
   let xhr = new XMLHttpRequest();
   xhr.open('GET', 'json/menu.json');
@@ -88,7 +131,7 @@ function initMenu() {
       } else {
           let new_m_items = JSON.parse(xhr.responseText);
           for (let key in new_m_items) {
-            m_items[itemIndex] = new MenuItem(new_m_items[key].itemPlace, new_m_items[key].itemHref, new_m_items[key].itemName);
+            m_items[menuIndex] = new MenuItem(new_m_items[key].itemPlace, new_m_items[key].itemHref, new_m_items[key].itemName);
           }
         let menu = new Menu('menu_lvl-0', 'menu_lvl-0', m_items);
         menu.render();
@@ -97,26 +140,25 @@ function initMenu() {
   xhr.send();
 }
 
-function callGallery() {
+function initGallery() {
   let xhr = new XMLHttpRequest();
   xhr.open('GET', 'json/gallery.json');
 
   xhr.onload = function() {
-      // if (xhr.readyState != 4) {
-      //     alert(xhr.readyState + ': ' + xhr.statusText); // пример вывода: 404: Not Found
-      // } else {
-      //     let new_m_items = JSON.parse(xhr.responseText);
-      //     // console.log(new_m_items);
-      //     for (let key in new_m_items) {
-      //       m_items[itemIndex] = new MenuItem(new_m_items[key].itemPlace, new_m_items[key].itemHref, new_m_items[key].itemName);
-      //     }
-      //   let menu = new Menu('menu_lvl-0', 'menu_lvl-0', m_items);
-      //   menu.render();
-      // }
-      console.log( xhr.responseText );
+      if (xhr.readyState != 4) {
+          alert(xhr.readyState + ': ' + xhr.statusText);
+      } else {
+          let new_g_items = JSON.parse(xhr.responseText);
+          for (let key in new_g_items) {
+            g_items[galleryIndex] = new GalleryItem(new_g_items[key].itemThmb, new_g_items[key].itemSrc);
+          }
+        let gallery = new Gallery('gallery', 'gallery', g_items);
+        console.log(gallery);
+        gallery.render();
+      }
   }
   xhr.send();
 }
 
 initMenu();
-callGallery();
+initGallery();
