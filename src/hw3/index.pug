@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+html(lang="en")
+head
+  meta(charset="UTF-8")
+  title JS2-HW3
+  script(src="js/script.js")
+  link(rel="stylesheet", href="css/style.css")
+body
+  - var inputs = ["name", "phone", "email", "text"];
+    for input in inputs
+      .wrap
+        input(type="text", id=input, placeholder=input)
+        button(id="check" + input) Check
