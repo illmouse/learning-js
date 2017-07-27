@@ -7,6 +7,8 @@ function addEvents() {
     let button = document.getElementById('check' + inputs[ i ]);
     button.addEventListener( 'click', checkRegExp);
   }
+  let button = document.getElementById('replaceSymbol');
+  button.addEventListener( 'click', replaceSymbol);
 }
 
 function checkRegExp() {
@@ -16,18 +18,18 @@ function checkRegExp() {
           text = document.getElementById( tid ).value;
       switch (bid) {
         case "checkName":
-          re = new RegExp( '[a-zA-Z]' );
+          re = new RegExp( '[A-Za-z]' );
           break;
         case "checkPhone":
-          re = new RegExp( '^\\d+$' );
+          re = new RegExp( '^\\+7\\(\\d{3}\\)\\d{3}-\\d{4}$' );
           break;
         case "checkEmail":
-          re = new RegExp( '^\\d+$' );
+          re = new RegExp( '^\\w+\\.?\\w+@\\w+\\.[A-Za-z]{2,5}$' );
           break;
         case "checkText":
-          re = new RegExp( '[A-z]' );
+          re = new RegExp( "\\w+" );
           break;
-      }  
+      }
 
       if ( re.test( text )) {
         console.log( 'Верно' );
@@ -39,6 +41,13 @@ function checkRegExp() {
       }
 }
 
+function replaceSymbol() {
+  let re = new RegExp( '' ),
+      text = document.getElementById( 'text-block' ).innerText;
+  let replace = text.replace( /'[^(\\w\\'\\w)]/g, '"' );
+  document.getElementById( 'text-block' ).innerText = replace;
+}
+
 function paint( elem, cond ) {
   elem = document.getElementById( elem );
   if ( cond ) {
@@ -47,4 +56,5 @@ function paint( elem, cond ) {
       elem.className = ('red');
   }
 }
+
 window.onload = addEvents;
