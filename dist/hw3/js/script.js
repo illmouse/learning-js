@@ -32,19 +32,18 @@ function checkRegExp() {
       }
 
       if ( re.test( text )) {
-        console.log( 'Верно' );
+        alert( 'Верно' );
         paint( tid, true );
       }
       else {
-        console.log( 'Ошибка' );
+        alert( 'Ошибка' );
         paint( tid, false );
       }
 }
 
 function replaceSymbol() {
-  let re = new RegExp( '' ),
-      text = document.getElementById( 'text-block' ).innerText;
-  let replace = text.replace( /'[^(\\w\\'\\w)]/g, '"' );
+  let text = document.getElementById( 'text-block' ).innerText,
+      replace = text.replace( /'/g, '"' );
   document.getElementById( 'text-block' ).innerText = replace;
 }
 
