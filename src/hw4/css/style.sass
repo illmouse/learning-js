@@ -1,0 +1,18 @@
+.menu_lvl-0
+  position: relative
+  border: 1px solid black
+  width: 20%
+  ul
+    display: none
+    // position: absolute
+    // left: 200px
+    top: 0
+.menu-item
+  cursor: pointer
+  &:hover > ul
+    display: block
+
+.tabs__content
+  display: none /* по умолчанию прячем все блоки */
+.tabs__content.active
+  display: block /* по умолчанию показываем нужный блок */
